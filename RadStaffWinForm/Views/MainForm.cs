@@ -1,6 +1,6 @@
 using RadStaffWinForm.Models;
 
-namespace RadStaffWinForm
+namespace RadStaffWinForm.Views
 {
     public partial class MainForm : Form
     {

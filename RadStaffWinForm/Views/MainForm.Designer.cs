@@ -1,4 +1,4 @@
-﻿namespace RadStaffWinForm
+﻿namespace RadStaffWinForm.Views
 {
     partial class MainForm
     {

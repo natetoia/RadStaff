@@ -1,3 +1,5 @@
+using RadStaffWinForm.Views;
+
 namespace RadStaffWinForm
 {
     internal static class Program
