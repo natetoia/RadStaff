@@ -5,13 +5,13 @@ namespace RadStaffWinForm.DataService
 {
     public class DataService(DbContext dbContext)
     {
-        public List<StaffMember>? GetStaffMembersWithDetails(List<int> StaffTypeIds)
+        public List<StaffMember>? GetStaffMembersWithDetails(List<int> typeIds)
         {
             return dbContext.Set<StaffMember>()
                 .Include(s => s.StaffStatus)
                 .Include(s => s.StaffType)
                 .Include(s => s.StaffManager)?
-                .Where(s => StaffTypeIds.Contains(s.StaffTypeId))
+                .Where(s => typeIds.Contains(s.StaffTypeId))
                 .ToList();
         }
     }
