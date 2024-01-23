@@ -58,7 +58,7 @@ namespace RadStaffWinForm.Views
             SetColumnWidth();
         }
 
-        private void BindDataToListView()
+        internal void BindDataToListView()
         {
             allStaffListView.Clear();
             CreateListView();
@@ -89,6 +89,7 @@ namespace RadStaffWinForm.Views
         private void AddStaffButton_Click(object sender, EventArgs e)
         {
             StaffNewForm = new AddForm();
+            StaffNewForm.StaffMainFormReference = this;
             StaffNewForm.Show();
         }
 

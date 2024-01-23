@@ -121,7 +121,7 @@
         #endregion
 
         private Label mainFormTitle;
-        private ListView allStaffListView;
+        private static ListView allStaffListView;
         private CheckBox showActiveCheckBox;
         private CheckBox showPendingCheckBox;
         private CheckBox showInactiveCheckBox;

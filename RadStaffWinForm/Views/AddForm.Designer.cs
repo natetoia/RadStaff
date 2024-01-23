@@ -54,6 +54,7 @@
             // 
             // addTitleComboBox
             // 
+            addTitleComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             addTitleComboBox.FormattingEnabled = true;
             addTitleComboBox.Items.AddRange(new object[] { "Mr", "Mrs", "Miss", "Sir" });
             addTitleComboBox.Location = new Point(12, 27);
@@ -85,6 +86,7 @@
             addFirstNameTextBox.Name = "addFirstNameTextBox";
             addFirstNameTextBox.Size = new Size(163, 23);
             addFirstNameTextBox.TabIndex = 4;
+            addFirstNameTextBox.KeyPress += AddFirstNameTextBox_KeyPress;
             // 
             // addMiddleInitialTextBox
             // 
@@ -92,6 +94,7 @@
             addMiddleInitialTextBox.Name = "addMiddleInitialTextBox";
             addMiddleInitialTextBox.Size = new Size(163, 23);
             addMiddleInitialTextBox.TabIndex = 5;
+            addMiddleInitialTextBox.KeyPress += AddMiddleInitialTextBox_KeyPress;
             // 
             // addMiddleInitialLabel
             // 
@@ -117,6 +120,7 @@
             addLastNameTextBox.Name = "addLastNameTextBox";
             addLastNameTextBox.Size = new Size(163, 23);
             addLastNameTextBox.TabIndex = 8;
+            addLastNameTextBox.KeyPress += AddLastNameTextBox_KeyPress;
             // 
             // addHomeLabel
             // 
@@ -133,6 +137,7 @@
             addIRDTextBox.Name = "addIRDTextBox";
             addIRDTextBox.Size = new Size(163, 23);
             addIRDTextBox.TabIndex = 10;
+            addIRDTextBox.KeyPress += AddIRDTextBox_KeyPress;
             // 
             // addMobileLabel
             // 
@@ -149,6 +154,7 @@
             addMobileTextBox.Name = "addMobileTextBox";
             addMobileTextBox.Size = new Size(163, 23);
             addMobileTextBox.TabIndex = 12;
+            addMobileTextBox.KeyPress += AddMobileTextBox_KeyPress;
             // 
             // addOfficeLabel
             // 
@@ -165,6 +171,7 @@
             addHomeTextBox.Name = "addHomeTextBox";
             addHomeTextBox.Size = new Size(163, 23);
             addHomeTextBox.TabIndex = 14;
+            addHomeTextBox.KeyPress += AddHomeTextBox_KeyPress;
             // 
             // addIRDLabel
             // 
@@ -181,6 +188,7 @@
             addOfficeTextBox.Name = "addOfficeTextBox";
             addOfficeTextBox.Size = new Size(163, 23);
             addOfficeTextBox.TabIndex = 16;
+            addOfficeTextBox.KeyPress += AddOfficeTextBox_KeyPress;
             // 
             // addTypeLabel
             // 
@@ -212,6 +220,7 @@
             // 
             // addManagerComboBox
             // 
+            addManagerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             addManagerComboBox.FormattingEnabled = true;
             addManagerComboBox.Location = new Point(198, 84);
             addManagerComboBox.Name = "addManagerComboBox";
@@ -226,6 +235,7 @@
             addNewButton.TabIndex = 21;
             addNewButton.Text = "Add";
             addNewButton.UseVisualStyleBackColor = true;
+            addNewButton.Click += addNewButton_Click;
             // 
             // cancelNewButton
             // 

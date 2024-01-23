@@ -44,5 +44,14 @@ namespace RadStaffWinForm.DataService
             }
         }
 
+        public void AddStaffMember(StaffMember staffMember)
+        {
+            using (var context = new RadDbContext())
+            {
+                context.StaffMembers!.Add(staffMember);
+                context.SaveChanges();
+            }
+        }
+
     }
 }
