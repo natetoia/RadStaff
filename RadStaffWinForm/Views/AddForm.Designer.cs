@@ -1,6 +1,6 @@
 ﻿namespace RadStaffWinForm.Views
 {
-    partial class NewForm
+    partial class AddForm
     {
         /// <summary>
         /// Required designer variable.
@@ -55,6 +55,7 @@
             // addTitleComboBox
             // 
             addTitleComboBox.FormattingEnabled = true;
+            addTitleComboBox.Items.AddRange(new object[] { "Mr", "Mrs", "Miss", "Sir" });
             addTitleComboBox.Location = new Point(12, 27);
             addTitleComboBox.Name = "addTitleComboBox";
             addTitleComboBox.Size = new Size(163, 23);
@@ -192,11 +193,13 @@
             // 
             // addTypeComboBox
             // 
+            addTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             addTypeComboBox.FormattingEnabled = true;
             addTypeComboBox.Location = new Point(198, 27);
             addTypeComboBox.Name = "addTypeComboBox";
             addTypeComboBox.Size = new Size(163, 23);
             addTypeComboBox.TabIndex = 18;
+            addTypeComboBox.SelectedIndexChanged += AddTypeComboBox_SelectedIndexChanged;
             // 
             // addManagerLabel
             // 
@@ -233,7 +236,7 @@
             cancelNewButton.Text = "Cancel";
             cancelNewButton.UseVisualStyleBackColor = true;
             // 
-            // NewForm
+            // AddForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -260,7 +263,8 @@
             Controls.Add(addFirstNameLabel);
             Controls.Add(addTitleLabel);
             Controls.Add(addTitleComboBox);
-            Name = "NewForm";
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+            Name = "AddForm";
             Text = "Add New Employee";
             ResumeLayout(false);
             PerformLayout();

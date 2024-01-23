@@ -18,5 +18,31 @@ namespace RadStaffWinForm.DataService
                     .ToList();
             }
         }
+
+        public List<object> GetManagerStaffMembersIdAndName()
+        {
+            using (var context = new RadDbContext())
+            {
+                var result = context.StaffMembers!
+                    .Where(s => s.StaffTypeId == 2)
+                    .Select(s => new
+                    {
+                        StaffMemberId = s.StaffId,
+                        StaffMemberName = s.StaffFirstName
+                    })
+                    .ToList();
+
+                return result.Cast<object>().ToList();
+            }
+        }
+
+        public List<StaffType> GetStaffTypes()
+        {
+            using (var context = new RadDbContext())
+            {
+                return context.StaffTypes!.ToList();
+            }
+        }
+
     }
 }

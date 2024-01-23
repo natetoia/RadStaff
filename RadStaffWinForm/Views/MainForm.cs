@@ -7,7 +7,7 @@ namespace RadStaffWinForm.Views
         private const int InactiveStatusId = 2;
         private const int PendingStatusId = 3;
 
-        public NewForm? StaffNewForm { get; private set; }
+        public AddForm? StaffNewForm { get; private set; }
 
         private readonly DataService.DataService _staffDataService;
 
@@ -88,7 +88,7 @@ namespace RadStaffWinForm.Views
 
         private void AddStaffButton_Click(object sender, EventArgs e)
         {
-            StaffNewForm = new NewForm();
+            StaffNewForm = new AddForm();
             StaffNewForm.Show();
         }
 
