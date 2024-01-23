@@ -1,10 +1,7 @@
-using RadStaffWinForm.Models;
-
 namespace RadStaffWinForm.Views
 {
     public partial class MainForm : Form
     {
-        private readonly RadDbContext _dbContext = new();
         private readonly List<int> _selectedStatusIds = [];
         private const int ActiveStatusId = 1;
         private const int InactiveStatusId = 2;
@@ -17,8 +14,7 @@ namespace RadStaffWinForm.Views
         public MainForm()
         {
             InitializeComponent();
-            _staffDataService = new DataService.DataService(_dbContext);
-
+            _staffDataService = new DataService.DataService();
             showActiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
             showInactiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
             showPendingCheckBox.CheckedChanged += Checkbox_CheckedChanged;
