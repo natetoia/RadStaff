@@ -34,8 +34,10 @@
         {
             addManagerComboBox.Enabled = false;
             addManagerComboBox.SelectedIndex = -1;
+            var selectedStaffType = addTypeComboBox.SelectedValue;
 
-            if (addTypeComboBox.SelectedIndex != 0)
+            // Early return if the selected value is not 1
+            if (selectedStaffType == null || !selectedStaffType.Equals(1))
             {
                 return;
             }
