@@ -1,112 +1,111 @@
-namespace RadStaffWinForm.Views
+namespace RadStaffWinForm.Views;
+
+public partial class MainForm : Form
 {
-    public partial class MainForm : Form
+    private const int ActiveStatusId = 1;
+    private const int InactiveStatusId = 2;
+    private const int PendingStatusId = 3;
+    private readonly List<int> _selectedStatusIds = [];
+
+
+    public MainForm()
     {
-        private readonly List<int> _selectedStatusIds = [];
-        private const int ActiveStatusId = 1;
-        private const int InactiveStatusId = 2;
-        private const int PendingStatusId = 3;
+        InitializeComponent();
+        showActiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
+        showInactiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
+        showPendingCheckBox.CheckedChanged += Checkbox_CheckedChanged;
+        BindDataToListView();
+    }
 
-        public AddForm? StaffNewForm { get; private set; }
+    public AddForm? StaffNewForm { get; private set; }
+    public EditForm? StaffEditForm { get; private set; }
 
-        private readonly DataService.DataService _staffDataService;
+    private void Checkbox_CheckedChanged(object? sender, EventArgs e)
+    {
+        BindDataToListView();
+    }
 
-        public MainForm()
+    private void UpdateSelectedStatusIds()
+    {
+        _selectedStatusIds.Clear();
+
+        if (showActiveCheckBox.Checked)
+            _selectedStatusIds.Add(ActiveStatusId);
+
+        if (showInactiveCheckBox.Checked)
+            _selectedStatusIds.Add(InactiveStatusId);
+
+        if (showPendingCheckBox.Checked)
+            _selectedStatusIds.Add(PendingStatusId);
+    }
+
+    private void CreateListView()
+    {
+        allStaffListView.View = View.Details;
+        var columns = new[]
         {
-            InitializeComponent();
-            _staffDataService = new DataService.DataService();
-            showActiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
-            showInactiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
-            showPendingCheckBox.CheckedChanged += Checkbox_CheckedChanged;
-            BindDataToListView();
-        }
+            "Staff ID", "Employee Status", "Title", "First Name", "Middle Initial",
+            "Last Name", "Employee Type", "Manager", "Home Ph", "Mobile Ph", "Office Ext.",
+            "IRD Number"
+        };
 
-        private void Checkbox_CheckedChanged(object? sender, EventArgs e)
+        foreach (var column in columns) allStaffListView.Columns.Add(column);
+
+        SetColumnWidth();
+    }
+
+    internal void BindDataToListView()
+    {
+        allStaffListView.Clear();
+        CreateListView();
+
+        UpdateSelectedStatusIds();
+        var staffMembers = DataService.DataService.GetStaffMembersWithDetails(_selectedStatusIds);
+
+        if (staffMembers == null)
+            return;
+
+        allStaffListView.Items.AddRange(staffMembers.Select(staffMember => new ListViewItem(new[]
         {
-            BindDataToListView();
-        }
+            staffMember.StaffId.ToString(),
+            staffMember.StaffStatus.StaffStatusDescription,
+            staffMember.StaffTitle,
+            staffMember.StaffFirstName,
+            staffMember.StaffMiddleInitial,
+            staffMember.StaffLastName,
+            staffMember.StaffType.StaffTypeDescription,
+            staffMember.StaffManager is { } manager ? $"{manager.StaffFirstName} {manager.StaffLastName}" : "",
+            staffMember.StaffHomePhone,
+            staffMember.StaffCellPhone,
+            staffMember.StaffOfficeExtension,
+            staffMember.StaffIrdnumber
+        }!)).ToArray());
+    }
 
-        private void UpdateSelectedStatusIds()
-        {
-            _selectedStatusIds.Clear();
+    private void AddStaffButton_Click(object sender, EventArgs e)
+    {
+        StaffNewForm = new AddForm();
+        StaffNewForm.StaffMainFormReference = this;
+        StaffNewForm.Show();
+    }
 
-            if (showActiveCheckBox.Checked)
-                _selectedStatusIds.Add(ActiveStatusId);
+    private void SetColumnWidth()
+    {
+        var columnCount = allStaffListView.Columns.Count;
+        var columnWidth = allStaffListView.Width / columnCount;
 
-            if (showInactiveCheckBox.Checked)
-                _selectedStatusIds.Add(InactiveStatusId);
+        foreach (ColumnHeader column in allStaffListView.Columns) column.Width = columnWidth;
+    }
 
-            if (showPendingCheckBox.Checked)
-                _selectedStatusIds.Add(PendingStatusId);
-        }
+    private void MainForm_Resize(object sender, EventArgs e)
+    {
+        SetColumnWidth();
+    }
 
-        private void CreateListView()
-        {
-            allStaffListView.View = View.Details;
-            var columns = new[]
-            {
-                "Employee Status", "Staff ID", "Title", "First Name", "Middle Initial", 
-                "Last Name", "Home Ph", "Mobile Ph", "Office Ext.", 
-                "IRD Number", "Employee Type", "Manager"
-            };
-
-            foreach (var column in columns)
-            {
-                allStaffListView.Columns.Add(column);
-            }
-
-            SetColumnWidth();
-        }
-
-        internal void BindDataToListView()
-        {
-            allStaffListView.Clear();
-            CreateListView();
-
-            UpdateSelectedStatusIds();
-            var staffMembers = _staffDataService.GetStaffMembersWithDetails(_selectedStatusIds);
-
-            if (staffMembers == null)
-                return;
-
-            allStaffListView.Items.AddRange(staffMembers.Select(staffMember => new ListViewItem(new[]
-            {
-                staffMember.StaffStatus.StaffStatusDescription,
-                staffMember.StaffId.ToString(),
-                staffMember.StaffTitle,
-                staffMember.StaffFirstName,
-                staffMember.StaffMiddleInitial,
-                staffMember.StaffLastName,
-                staffMember.StaffHomePhone,
-                staffMember.StaffCellPhone,
-                staffMember.StaffOfficeExtension,
-                staffMember.StaffIrdnumber,
-                staffMember.StaffType.StaffTypeDescription,
-                staffMember.StaffManager?.StaffFirstName
-            }!)).ToArray());
-        }
-
-        private void AddStaffButton_Click(object sender, EventArgs e)
-        {
-            StaffNewForm = new AddForm();
-            StaffNewForm.StaffMainFormReference = this;
-            StaffNewForm.Show();
-        }
-
-        private void SetColumnWidth()
-        {
-            var columnCount = allStaffListView.Columns.Count;
-            var columnWidth = allStaffListView.Width / columnCount;
-
-            foreach (ColumnHeader column in allStaffListView.Columns)
-            {
-                column.Width = columnWidth;
-            }
-        }
-
-        private void MainForm_Resize(object sender, EventArgs e)
-        {
-            SetColumnWidth();
-        }
+    private void EditStaffButton_Click(object sender, EventArgs e)
+    {
+        StaffEditForm = new EditForm();
+        StaffEditForm.StaffMainFormReference = this;
+        StaffEditForm.Show();
     }
 }

@@ -6,7 +6,7 @@ namespace RadStaffWinForm.DataService
 {
     public class DataService
     {
-        public List<StaffMember>? GetStaffMembersWithDetails(List<int> statusIds)
+        public static List<StaffMember>? GetStaffMembersWithDetails(List<int> statusIds)
         {
             using (var context = new RadDbContext())
             {
@@ -15,20 +15,22 @@ namespace RadStaffWinForm.DataService
                     .Include(s => s.StaffType)
                     .Include(s => s.StaffManager)?
                     .Where(s => statusIds.Contains(s.StaffStatusId))
+                    .OrderBy(s => s.StaffId)
                     .ToList();
             }
         }
 
-        public List<object> GetManagerStaffMembersIdAndName()
+        public static List<object> GetManagerStaffMembersIdAndName()
         {
             using (var context = new RadDbContext())
             {
                 var result = context.StaffMembers!
                     .Where(s => s.StaffTypeId == 2)
+                    .OrderBy(s => s.StaffFirstName)
                     .Select(s => new
                     {
                         StaffMemberId = s.StaffId,
-                        StaffMemberName = s.StaffFirstName
+                        StaffMemberName = $"{s.StaffFirstName} {s.StaffLastName}"
                     })
                     .ToList();
 
@@ -36,7 +38,7 @@ namespace RadStaffWinForm.DataService
             }
         }
 
-        public List<StaffType> GetStaffTypes()
+        public static List<StaffType> GetStaffTypes()
         {
             using (var context = new RadDbContext())
             {
@@ -44,7 +46,7 @@ namespace RadStaffWinForm.DataService
             }
         }
 
-        public void AddStaffMember(StaffMember staffMember)
+        public static void AddStaffMember(StaffMember staffMember)
         {
             using (var context = new RadDbContext())
             {

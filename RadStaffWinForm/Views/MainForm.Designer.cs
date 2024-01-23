@@ -27,6 +27,7 @@
             showPendingCheckBox = new CheckBox();
             showInactiveCheckBox = new CheckBox();
             addStaffButton = new Button();
+            editStaffButton = new Button();
             SuspendLayout();
             // 
             // mainFormTitle
@@ -51,7 +52,6 @@
             allStaffListView.Size = new Size(1117, 531);
             allStaffListView.TabIndex = 1;
             allStaffListView.UseCompatibleStateImageBehavior = false;
-            
             // 
             // showActiveCheckBox
             // 
@@ -99,12 +99,25 @@
             addStaffButton.UseVisualStyleBackColor = true;
             addStaffButton.Click += AddStaffButton_Click;
             // 
+            // editStaffButton
+            // 
+            editStaffButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            editStaffButton.Enabled = false;
+            editStaffButton.Location = new Point(151, 607);
+            editStaffButton.Name = "editStaffButton";
+            editStaffButton.Size = new Size(133, 33);
+            editStaffButton.TabIndex = 6;
+            editStaffButton.Text = "Edit";
+            editStaffButton.UseVisualStyleBackColor = true;
+            editStaffButton.Click += EditStaffButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1140, 653);
+            Controls.Add(editStaffButton);
             Controls.Add(addStaffButton);
             Controls.Add(showInactiveCheckBox);
             Controls.Add(showPendingCheckBox);
@@ -121,10 +134,11 @@
         #endregion
 
         private Label mainFormTitle;
-        private static ListView allStaffListView;
         private CheckBox showActiveCheckBox;
         private CheckBox showPendingCheckBox;
         private CheckBox showInactiveCheckBox;
         private Button addStaffButton;
+        private Button editStaffButton;
+        private ListView allStaffListView;
     }
 }

@@ -6,7 +6,7 @@ namespace RadStaffWinForm.Views;
 public partial class AddForm : Form
 {
     private const string NameValidationPattern = @"^[a-zA-Z-]{0,50}$";
-    private const string MiddleInitialValidationPattern = @"^[a-zA-Z]{1}([ .][a-zA-Z]{1})?$";
+    private const string MiddleInitialValidationPattern = @"^[a-zA-Z](?:\s?[a-zA-Z])?$";
     private const string IrdNumberValidationPattern = @"^\d{0,9}$";
     private const string PhoneNumberValidationPattern = @"^\d{0,16}$";
     private const string OfficeNumberValidationPattern = @"^\d{0,5}$";
@@ -20,11 +20,11 @@ public partial class AddForm : Form
         BindStaffTypesComboBox();
     }
 
-    public MainForm StaffMainFormReference { get; set; }
+    public MainForm? StaffMainFormReference { get; set; }
 
     private void BindStaffTypesComboBox()
     {
-        var staffTypes = _staffDataService.GetStaffTypes();
+        var staffTypes = DataService.DataService.GetStaffTypes();
         addTypeComboBox.DataSource = staffTypes;
         addTypeComboBox.DisplayMember = "StaffTypeDescription";
         addTypeComboBox.ValueMember = "StaffTypeId";
@@ -33,7 +33,7 @@ public partial class AddForm : Form
 
     private void BindManagerComboBox()
     {
-        var managerStaffMembers = _staffDataService.GetManagerStaffMembersIdAndName();
+        var managerStaffMembers = DataService.DataService.GetManagerStaffMembersIdAndName();
 
         addManagerComboBox.DataSource = managerStaffMembers;
         addManagerComboBox.DisplayMember = "StaffMemberName";
@@ -46,8 +46,6 @@ public partial class AddForm : Form
         addManagerComboBox.Enabled = false;
         addManagerComboBox.SelectedIndex = -1;
         var selectedStaffType = addTypeComboBox.SelectedValue;
-
-        // Early return if the selected value is not 1
         if (selectedStaffType == null || !selectedStaffType.Equals(1)) return;
 
         addManagerComboBox.Enabled = true;
@@ -57,6 +55,10 @@ public partial class AddForm : Form
     private void addNewButton_Click(object sender, EventArgs e)
     {
         if (!ValidateInput()) return;
+        var confirmNew = MessageBox.Show("Confirm New Employee?", "Confirm New Employee",
+            MessageBoxButtons.YesNo);
+        if (confirmNew == DialogResult.No) return;
+            
         var newStaffMember = new StaffMember
         {
             StaffTitle = addTitleComboBox.Text,
@@ -72,9 +74,10 @@ public partial class AddForm : Form
             StaffStatusId = 3
         };
 
-        _staffDataService.AddStaffMember(newStaffMember);
+        DataService.DataService.AddStaffMember(newStaffMember);
         StaffMainFormReference?.BindDataToListView();
         Close();
+        MessageBox.Show("Pending staff member created successfully");
     }
 
     private void AddFirstNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -204,7 +207,8 @@ public partial class AddForm : Form
 
         if (addManagerComboBox.Enabled && addManagerComboBox.SelectedIndex == -1)
         {
-            _toolTip.Show("Manager must be selected. If no Manager exists, please create a Manager record.", addManagerComboBox, 0, -20, 5000);
+            _toolTip.Show("Manager must be selected. If no Manager exists, please create a Manager record.",
+                addManagerComboBox, 0, -20, 5000);
             return false;
         }
 
@@ -230,5 +234,13 @@ public partial class AddForm : Form
         }
 
         return true;
+    }
+
+    private void cancelNewButton_Click(object sender, EventArgs e)
+    {
+        var confirmClose = MessageBox.Show("Are you sure you want to cancel?", "Cancel New Employee",
+            MessageBoxButtons.YesNo);
+        if (confirmClose == DialogResult.Yes)
+            Close();
     }
 }
