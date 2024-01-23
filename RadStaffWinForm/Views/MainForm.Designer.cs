@@ -26,6 +26,7 @@
             showActiveCheckBox = new CheckBox();
             showPendingCheckBox = new CheckBox();
             showInactiveCheckBox = new CheckBox();
+            addStaffButton = new Button();
             SuspendLayout();
             // 
             // mainFormTitle
@@ -41,18 +42,24 @@
             // allStaffListView
             // 
             allStaffListView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            allStaffListView.Location = new Point(367, 49);
+            allStaffListView.BorderStyle = BorderStyle.FixedSingle;
+            allStaffListView.FullRowSelect = true;
+            allStaffListView.GridLines = true;
+            allStaffListView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            allStaffListView.Location = new Point(11, 62);
             allStaffListView.Name = "allStaffListView";
-            allStaffListView.Size = new Size(421, 389);
+            allStaffListView.Size = new Size(1117, 531);
             allStaffListView.TabIndex = 1;
             allStaffListView.UseCompatibleStateImageBehavior = false;
+            
             // 
             // showActiveCheckBox
             // 
+            showActiveCheckBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             showActiveCheckBox.AutoSize = true;
             showActiveCheckBox.Checked = true;
             showActiveCheckBox.CheckState = CheckState.Checked;
-            showActiveCheckBox.Location = new Point(367, 28);
+            showActiveCheckBox.Location = new Point(784, 27);
             showActiveCheckBox.Name = "showActiveCheckBox";
             showActiveCheckBox.Size = new Size(91, 19);
             showActiveCheckBox.TabIndex = 2;
@@ -61,8 +68,9 @@
             // 
             // showPendingCheckBox
             // 
+            showPendingCheckBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             showPendingCheckBox.AutoSize = true;
-            showPendingCheckBox.Location = new Point(464, 27);
+            showPendingCheckBox.Location = new Point(901, 27);
             showPendingCheckBox.Name = "showPendingCheckBox";
             showPendingCheckBox.Size = new Size(102, 19);
             showPendingCheckBox.TabIndex = 3;
@@ -71,20 +79,33 @@
             // 
             // showInactiveCheckBox
             // 
+            showInactiveCheckBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             showInactiveCheckBox.AutoSize = true;
-            showInactiveCheckBox.Location = new Point(572, 27);
+            showInactiveCheckBox.Location = new Point(1029, 27);
             showInactiveCheckBox.Name = "showInactiveCheckBox";
             showInactiveCheckBox.Size = new Size(99, 19);
             showInactiveCheckBox.TabIndex = 4;
             showInactiveCheckBox.Text = "Show Inactive";
             showInactiveCheckBox.UseVisualStyleBackColor = true;
             // 
+            // addStaffButton
+            // 
+            addStaffButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            addStaffButton.Location = new Point(12, 607);
+            addStaffButton.Name = "addStaffButton";
+            addStaffButton.Size = new Size(133, 33);
+            addStaffButton.TabIndex = 5;
+            addStaffButton.Text = "Add New";
+            addStaffButton.UseVisualStyleBackColor = true;
+            addStaffButton.Click += AddStaffButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1140, 653);
+            Controls.Add(addStaffButton);
             Controls.Add(showInactiveCheckBox);
             Controls.Add(showPendingCheckBox);
             Controls.Add(showActiveCheckBox);
@@ -92,6 +113,7 @@
             Controls.Add(mainFormTitle);
             Name = "MainForm";
             Text = "RadStaff Contact List";
+            Resize += MainForm_Resize;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -103,5 +125,6 @@
         private CheckBox showActiveCheckBox;
         private CheckBox showPendingCheckBox;
         private CheckBox showInactiveCheckBox;
+        private Button addStaffButton;
     }
 }
