@@ -276,6 +276,7 @@
             Controls.Add(addTitleComboBox);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "AddForm";
+            StartPosition = FormStartPosition.Manual;
             Text = "Add New Employee";
             ResumeLayout(false);
             PerformLayout();

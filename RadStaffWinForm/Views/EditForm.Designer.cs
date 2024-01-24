@@ -275,6 +275,7 @@
             Controls.Add(editTitleComboBox);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Name = "EditForm";
+            StartPosition = FormStartPosition.Manual;
             Text = "Edit Employee";
             ResumeLayout(false);
             PerformLayout();

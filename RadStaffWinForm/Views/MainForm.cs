@@ -83,7 +83,9 @@ public partial class MainForm : Form
     {
         StaffNewForm = new AddForm();
         StaffNewForm.StaffMainFormReference = this;
-        StaffNewForm.Show();
+        StaffNewForm.Tag = this;
+        StaffNewForm.Location = this.Location;
+        StaffNewForm.Show(this);
     }
 
     private void SetColumnWidth()
@@ -118,7 +120,9 @@ public partial class MainForm : Form
     {
         StaffEditForm = new EditForm();
         StaffEditForm.StaffMainFormReference = this;
-        StaffEditForm.Show();
+        StaffEditForm.Tag = this;
+        StaffEditForm.Location = this.Location;
+        StaffEditForm.Show(this);
     }
 
     private void AllStaffListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)

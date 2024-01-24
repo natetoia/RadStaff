@@ -131,6 +131,7 @@
             Controls.Add(allStaffListView);
             Controls.Add(mainFormTitle);
             Name = "MainForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "RadStaff Contact List";
             Resize += MainForm_Resize;
             ResumeLayout(false);
