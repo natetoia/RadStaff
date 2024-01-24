@@ -52,6 +52,9 @@
             allStaffListView.Size = new Size(1117, 531);
             allStaffListView.TabIndex = 1;
             allStaffListView.UseCompatibleStateImageBehavior = false;
+            allStaffListView.ItemSelectionChanged += AllStaffListView_ItemSelectionChanged;
+            allStaffListView.SelectedIndexChanged += AllStaffListView_SelectedIndexChanged;
+            allStaffListView.MouseDoubleClick += AllStaffListView_MouseDoubleClick;
             // 
             // showActiveCheckBox
             // 
@@ -65,6 +68,7 @@
             showActiveCheckBox.TabIndex = 2;
             showActiveCheckBox.Text = "Show Active";
             showActiveCheckBox.UseVisualStyleBackColor = true;
+            showActiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
             // 
             // showPendingCheckBox
             // 
@@ -76,6 +80,7 @@
             showPendingCheckBox.TabIndex = 3;
             showPendingCheckBox.Text = "Show Pending";
             showPendingCheckBox.UseVisualStyleBackColor = true;
+            showPendingCheckBox.CheckedChanged += Checkbox_CheckedChanged;
             // 
             // showInactiveCheckBox
             // 
@@ -87,6 +92,7 @@
             showInactiveCheckBox.TabIndex = 4;
             showInactiveCheckBox.Text = "Show Inactive";
             showInactiveCheckBox.UseVisualStyleBackColor = true;
+            showInactiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
             // 
             // addStaffButton
             // 

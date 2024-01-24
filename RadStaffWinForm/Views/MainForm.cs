@@ -11,9 +11,6 @@ public partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
-        showActiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
-        showInactiveCheckBox.CheckedChanged += Checkbox_CheckedChanged;
-        showPendingCheckBox.CheckedChanged += Checkbox_CheckedChanged;
         BindDataToListView();
     }
 
@@ -104,8 +101,28 @@ public partial class MainForm : Form
 
     private void EditStaffButton_Click(object sender, EventArgs e)
     {
+        OpenEditForm();
+    }
+
+    private void AllStaffListView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        editStaffButton.Enabled = allStaffListView.SelectedItems.Count > 0;
+    }
+
+    private void AllStaffListView_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+        if (allStaffListView.SelectedItems.Count > 0 && allStaffListView.HitTest(e.X, e.Y).Item != null) OpenEditForm();
+    }
+
+    private void OpenEditForm()
+    {
         StaffEditForm = new EditForm();
         StaffEditForm.StaffMainFormReference = this;
         StaffEditForm.Show();
+    }
+
+    private void AllStaffListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+    {
+        if (allStaffListView.SelectedItems.Count > 1) e.Item!.Selected = false;
     }
 }
