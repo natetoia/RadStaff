@@ -152,6 +152,7 @@ public partial class MainForm : Form
         if (confirmDeleteDialog == DialogResult.Yes)
         {
             DataService.DataService.DeleteStaffMemberById(staffMemberToDelete.StaffId);
+            BindDataToListView();
             MessageBox.Show(
                 $@"{staffMemberToDelete.StaffFirstName} {staffMemberToDelete.StaffLastName} deleted successfully");
         }
