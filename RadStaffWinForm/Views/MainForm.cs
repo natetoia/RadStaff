@@ -84,7 +84,7 @@ public partial class MainForm : Form
         StaffNewForm = new AddForm();
         StaffNewForm.StaffMainFormReference = this;
         StaffNewForm.Tag = this;
-        StaffNewForm.Location = this.Location;
+        StaffNewForm.Location = Location;
         StaffNewForm.Show(this);
     }
 
@@ -109,6 +109,7 @@ public partial class MainForm : Form
     private void AllStaffListView_SelectedIndexChanged(object sender, EventArgs e)
     {
         editStaffButton.Enabled = allStaffListView.SelectedItems.Count > 0;
+        deleteStaffButton.Enabled = allStaffListView.SelectedItems.Count > 0;
     }
 
     private void AllStaffListView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -118,20 +119,46 @@ public partial class MainForm : Form
 
     private void OpenEditForm()
     {
-        if (allStaffListView.SelectedItems.Count > 0)
-        {
-            var selectedStaffId = int.Parse(allStaffListView.SelectedItems[0].SubItems[0].Text);
-            StaffEditForm = new EditForm(selectedStaffId);
-            StaffEditForm.StaffMainFormReference = this;
-            StaffEditForm.Tag = this;
-            StaffEditForm.Location = this.Location;
-            StaffEditForm.Show(this);
-        }
+        if (allStaffListView.SelectedItems.Count == 0) return;
+        var selectedStaffId = int.Parse(allStaffListView.SelectedItems[0].SubItems[0].Text);
+        StaffEditForm = new EditForm(selectedStaffId);
+        StaffEditForm.StaffMainFormReference = this;
+        StaffEditForm.Tag = this;
+        StaffEditForm.Location = Location;
+        StaffEditForm.Show(this);
     }
 
 
     private void AllStaffListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
     {
         if (allStaffListView.SelectedItems.Count > 1) e.Item!.Selected = false;
+    }
+
+    private void DeleteStaffButton_Click(object sender, EventArgs e)
+    {
+        if (allStaffListView.SelectedItems.Count == 0) return;
+        var staffMemberToDelete =
+            DataService.DataService.GetStaffMemberById(
+                int.Parse(allStaffListView.SelectedItems[0].SubItems[0].Text));
+        if (!DeleteStaffValidation(staffMemberToDelete!.StaffId))
+        {
+            MessageBox.Show("Reassign associated employees to a new manager first.");
+            return;
+        }
+
+        var confirmDeleteDialog = MessageBox.Show(
+            $@"Are you sure you want to delete {staffMemberToDelete.StaffFirstName} {staffMemberToDelete.StaffLastName}?",
+            "Delete Employee", MessageBoxButtons.YesNo);
+        if (confirmDeleteDialog == DialogResult.Yes)
+        {
+            DataService.DataService.DeleteStaffMemberById(staffMemberToDelete.StaffId);
+            MessageBox.Show(
+                $@"{staffMemberToDelete.StaffFirstName} {staffMemberToDelete.StaffLastName} deleted successfully");
+        }
+    }
+
+    private static bool DeleteStaffValidation(int staffId)
+    {
+        return !DataService.DataService.HasStaffMembersWithManagerId(staffId);
     }
 }

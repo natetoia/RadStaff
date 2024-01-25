@@ -28,6 +28,7 @@
             showInactiveCheckBox = new CheckBox();
             addStaffButton = new Button();
             editStaffButton = new Button();
+            deleteStaffButton = new Button();
             SuspendLayout();
             // 
             // mainFormTitle
@@ -117,12 +118,25 @@
             editStaffButton.UseVisualStyleBackColor = true;
             editStaffButton.Click += EditStaffButton_Click;
             // 
+            // deleteStaffButton
+            // 
+            deleteStaffButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            deleteStaffButton.Enabled = false;
+            deleteStaffButton.Location = new Point(995, 608);
+            deleteStaffButton.Name = "deleteStaffButton";
+            deleteStaffButton.Size = new Size(133, 33);
+            deleteStaffButton.TabIndex = 7;
+            deleteStaffButton.Text = "Delete";
+            deleteStaffButton.UseVisualStyleBackColor = true;
+            deleteStaffButton.Click += DeleteStaffButton_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1140, 653);
+            Controls.Add(deleteStaffButton);
             Controls.Add(editStaffButton);
             Controls.Add(addStaffButton);
             Controls.Add(showInactiveCheckBox);
@@ -147,5 +161,6 @@
         private Button addStaffButton;
         private Button editStaffButton;
         private ListView allStaffListView;
+        private Button deleteStaffButton;
     }
 }
