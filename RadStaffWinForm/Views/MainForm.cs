@@ -118,12 +118,17 @@ public partial class MainForm : Form
 
     private void OpenEditForm()
     {
-        StaffEditForm = new EditForm();
-        StaffEditForm.StaffMainFormReference = this;
-        StaffEditForm.Tag = this;
-        StaffEditForm.Location = this.Location;
-        StaffEditForm.Show(this);
+        if (allStaffListView.SelectedItems.Count > 0)
+        {
+            var selectedStaffId = int.Parse(allStaffListView.SelectedItems[0].SubItems[0].Text);
+            StaffEditForm = new EditForm(selectedStaffId);
+            StaffEditForm.StaffMainFormReference = this;
+            StaffEditForm.Tag = this;
+            StaffEditForm.Location = this.Location;
+            StaffEditForm.Show(this);
+        }
     }
+
 
     private void AllStaffListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
     {

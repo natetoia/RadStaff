@@ -58,7 +58,7 @@ public partial class AddForm : Form
         var confirmNew = MessageBox.Show("Confirm New Employee?", "Confirm New Employee",
             MessageBoxButtons.YesNo);
         if (confirmNew == DialogResult.No) return;
-            
+
         var newStaffMember = new StaffMember
         {
             StaffTitle = addTitleComboBox.Text,
@@ -236,7 +236,7 @@ public partial class AddForm : Form
         return true;
     }
 
-    private void cancelNewButton_Click(object sender, EventArgs e)
+    private void CancelNewButton_Click(object sender, EventArgs e)
     {
         var confirmClose = MessageBox.Show("Are you sure you want to cancel?", "Cancel New Employee",
             MessageBoxButtons.YesNo);

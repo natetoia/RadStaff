@@ -7,7 +7,7 @@ public partial class StaffMember
 {
     public int StaffId { get; set; }
 
-    public string StaffTitle { get; set; } = null!;
+    public string? StaffTitle { get; set; } = null!;
 
     public string StaffFirstName { get; set; } = null!;
 

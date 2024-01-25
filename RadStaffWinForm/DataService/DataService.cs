@@ -20,6 +20,18 @@ namespace RadStaffWinForm.DataService
             }
         }
 
+        public static StaffMember? GetStaffMemberById(int staffId)
+        {
+            using (var context = new RadDbContext())
+            {
+                return context.Set<StaffMember>()
+                    .Include(s => s.StaffStatus)
+                    .Include(s => s.StaffType)
+                    .Include(s => s.StaffManager)
+                    .FirstOrDefault(s => s.StaffId == staffId);
+            }
+        }
+
         public static List<object> GetManagerStaffMembersIdAndName()
         {
             using (var context = new RadDbContext())
@@ -46,6 +58,15 @@ namespace RadStaffWinForm.DataService
             }
         }
 
+        public static List<StaffStatus> GetStaffStatuses()
+        {
+            using (var context = new RadDbContext())
+            {
+                return context.StaffStatuses!.ToList();
+            }
+        }
+
+
         public static void AddStaffMember(StaffMember staffMember)
         {
             using (var context = new RadDbContext())
@@ -55,5 +76,37 @@ namespace RadStaffWinForm.DataService
             }
         }
 
+        public static void UpdateStaffMemberById(int staffId, StaffMember updatedStaffMember)
+        {
+            using (var context = new RadDbContext())
+            {
+                StaffMember? existingStaffMember = context.StaffMembers!
+                    .FirstOrDefault(s => s.StaffId == staffId);
+                if (existingStaffMember != null)
+                {
+                    existingStaffMember.StaffTitle = updatedStaffMember.StaffTitle;
+                    existingStaffMember.StaffFirstName = updatedStaffMember.StaffFirstName;
+                    existingStaffMember.StaffMiddleInitial = updatedStaffMember.StaffMiddleInitial;
+                    existingStaffMember.StaffLastName = updatedStaffMember.StaffLastName;
+                    existingStaffMember.StaffIrdnumber = updatedStaffMember.StaffIrdnumber;
+                    existingStaffMember.StaffCellPhone = updatedStaffMember.StaffCellPhone;
+                    existingStaffMember.StaffHomePhone = updatedStaffMember.StaffHomePhone;
+                    existingStaffMember.StaffOfficeExtension = updatedStaffMember.StaffOfficeExtension;
+                    existingStaffMember.StaffTypeId = updatedStaffMember.StaffTypeId;
+                    existingStaffMember.StaffManagerId = updatedStaffMember.StaffManagerId;
+                    existingStaffMember.StaffStatusId = updatedStaffMember.StaffStatusId;
+                }
+                context.SaveChanges();
+            }
+
+        }
+
+        public static bool HasStaffMembersWithManagerId(int managerId)
+        {
+            using (var context = new RadDbContext())
+            {
+                return context.StaffMembers!.Any(s => s.StaffManagerId == managerId);
+            }
+        }
     }
 }

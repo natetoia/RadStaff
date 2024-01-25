@@ -50,6 +50,8 @@
             editManagerComboBox = new ComboBox();
             editSaveButton = new Button();
             cancelEditButton = new Button();
+            editStatusComboBox = new ComboBox();
+            editStatusLabel = new Label();
             SuspendLayout();
             // 
             // editTitleComboBox
@@ -74,7 +76,7 @@
             // editFirstNameLabel
             // 
             editFirstNameLabel.AutoSize = true;
-            editFirstNameLabel.Location = new Point(12, 66);
+            editFirstNameLabel.Location = new Point(12, 64);
             editFirstNameLabel.Name = "editFirstNameLabel";
             editFirstNameLabel.Size = new Size(67, 15);
             editFirstNameLabel.TabIndex = 3;
@@ -82,7 +84,7 @@
             // 
             // editFirstNameTextBox
             // 
-            editFirstNameTextBox.Location = new Point(12, 84);
+            editFirstNameTextBox.Location = new Point(12, 82);
             editFirstNameTextBox.Name = "editFirstNameTextBox";
             editFirstNameTextBox.Size = new Size(163, 23);
             editFirstNameTextBox.TabIndex = 4;
@@ -90,7 +92,7 @@
             // 
             // editMiddleInitialTextBox
             // 
-            editMiddleInitialTextBox.Location = new Point(12, 141);
+            editMiddleInitialTextBox.Location = new Point(12, 137);
             editMiddleInitialTextBox.Name = "editMiddleInitialTextBox";
             editMiddleInitialTextBox.Size = new Size(163, 23);
             editMiddleInitialTextBox.TabIndex = 5;
@@ -99,7 +101,7 @@
             // editMiddleInitialLabel
             // 
             editMiddleInitialLabel.AutoSize = true;
-            editMiddleInitialLabel.Location = new Point(12, 123);
+            editMiddleInitialLabel.Location = new Point(12, 119);
             editMiddleInitialLabel.Name = "editMiddleInitialLabel";
             editMiddleInitialLabel.Size = new Size(79, 15);
             editMiddleInitialLabel.TabIndex = 6;
@@ -108,7 +110,7 @@
             // editLastNameLabel
             // 
             editLastNameLabel.AutoSize = true;
-            editLastNameLabel.Location = new Point(12, 180);
+            editLastNameLabel.Location = new Point(12, 174);
             editLastNameLabel.Name = "editLastNameLabel";
             editLastNameLabel.Size = new Size(66, 15);
             editLastNameLabel.TabIndex = 7;
@@ -116,7 +118,7 @@
             // 
             // editLastNameTextBox
             // 
-            editLastNameTextBox.Location = new Point(12, 198);
+            editLastNameTextBox.Location = new Point(12, 192);
             editLastNameTextBox.Name = "editLastNameTextBox";
             editLastNameTextBox.Size = new Size(163, 23);
             editLastNameTextBox.TabIndex = 8;
@@ -125,7 +127,7 @@
             // editHomeLabel
             // 
             editHomeLabel.AutoSize = true;
-            editHomeLabel.Location = new Point(198, 180);
+            editHomeLabel.Location = new Point(198, 174);
             editHomeLabel.Name = "editHomeLabel";
             editHomeLabel.Size = new Size(60, 15);
             editHomeLabel.TabIndex = 9;
@@ -133,7 +135,7 @@
             // 
             // editIRDTextBox
             // 
-            editIRDTextBox.Location = new Point(12, 255);
+            editIRDTextBox.Location = new Point(12, 247);
             editIRDTextBox.Name = "editIRDTextBox";
             editIRDTextBox.Size = new Size(163, 23);
             editIRDTextBox.TabIndex = 10;
@@ -142,7 +144,7 @@
             // editMobileLabel
             // 
             editMobileLabel.AutoSize = true;
-            editMobileLabel.Location = new Point(198, 123);
+            editMobileLabel.Location = new Point(198, 119);
             editMobileLabel.Name = "editMobileLabel";
             editMobileLabel.Size = new Size(64, 15);
             editMobileLabel.TabIndex = 11;
@@ -150,7 +152,7 @@
             // 
             // editMobileTextBox
             // 
-            editMobileTextBox.Location = new Point(198, 141);
+            editMobileTextBox.Location = new Point(198, 137);
             editMobileTextBox.Name = "editMobileTextBox";
             editMobileTextBox.Size = new Size(163, 23);
             editMobileTextBox.TabIndex = 12;
@@ -159,7 +161,7 @@
             // editOfficeLabel
             // 
             editOfficeLabel.AutoSize = true;
-            editOfficeLabel.Location = new Point(198, 237);
+            editOfficeLabel.Location = new Point(198, 229);
             editOfficeLabel.Name = "editOfficeLabel";
             editOfficeLabel.Size = new Size(61, 15);
             editOfficeLabel.TabIndex = 13;
@@ -167,7 +169,7 @@
             // 
             // editHomeTextBox
             // 
-            editHomeTextBox.Location = new Point(198, 198);
+            editHomeTextBox.Location = new Point(198, 192);
             editHomeTextBox.Name = "editHomeTextBox";
             editHomeTextBox.Size = new Size(163, 23);
             editHomeTextBox.TabIndex = 14;
@@ -176,7 +178,7 @@
             // editIRDLabel
             // 
             editIRDLabel.AutoSize = true;
-            editIRDLabel.Location = new Point(12, 237);
+            editIRDLabel.Location = new Point(12, 229);
             editIRDLabel.Name = "editIRDLabel";
             editIRDLabel.Size = new Size(47, 15);
             editIRDLabel.TabIndex = 15;
@@ -184,7 +186,7 @@
             // 
             // editOfficeTextBox
             // 
-            editOfficeTextBox.Location = new Point(198, 255);
+            editOfficeTextBox.Location = new Point(198, 247);
             editOfficeTextBox.Name = "editOfficeTextBox";
             editOfficeTextBox.Size = new Size(163, 23);
             editOfficeTextBox.TabIndex = 16;
@@ -212,7 +214,7 @@
             // editManagerLabel
             // 
             editManagerLabel.AutoSize = true;
-            editManagerLabel.Location = new Point(198, 66);
+            editManagerLabel.Location = new Point(198, 64);
             editManagerLabel.Name = "editManagerLabel";
             editManagerLabel.Size = new Size(57, 15);
             editManagerLabel.TabIndex = 19;
@@ -222,14 +224,14 @@
             // 
             editManagerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             editManagerComboBox.FormattingEnabled = true;
-            editManagerComboBox.Location = new Point(198, 84);
+            editManagerComboBox.Location = new Point(198, 82);
             editManagerComboBox.Name = "editManagerComboBox";
             editManagerComboBox.Size = new Size(163, 23);
             editManagerComboBox.TabIndex = 20;
             // 
             // editSaveButton
             // 
-            editSaveButton.Location = new Point(198, 305);
+            editSaveButton.Location = new Point(198, 302);
             editSaveButton.Name = "editSaveButton";
             editSaveButton.Size = new Size(75, 25);
             editSaveButton.TabIndex = 21;
@@ -239,18 +241,39 @@
             // 
             // cancelEditButton
             // 
-            cancelEditButton.Location = new Point(286, 305);
+            cancelEditButton.Location = new Point(286, 302);
             cancelEditButton.Name = "cancelEditButton";
             cancelEditButton.Size = new Size(75, 25);
             cancelEditButton.TabIndex = 22;
             cancelEditButton.Text = "Cancel";
             cancelEditButton.UseVisualStyleBackColor = true;
+            cancelEditButton.Click += CancelEditButton_Click;
+            // 
+            // editStatusComboBox
+            // 
+            editStatusComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            editStatusComboBox.FormattingEnabled = true;
+            editStatusComboBox.Location = new Point(12, 302);
+            editStatusComboBox.Name = "editStatusComboBox";
+            editStatusComboBox.Size = new Size(163, 23);
+            editStatusComboBox.TabIndex = 23;
+            // 
+            // editStatusLabel
+            // 
+            editStatusLabel.AutoSize = true;
+            editStatusLabel.Location = new Point(12, 284);
+            editStatusLabel.Name = "editStatusLabel";
+            editStatusLabel.Size = new Size(42, 15);
+            editStatusLabel.TabIndex = 24;
+            editStatusLabel.Text = "Status:";
             // 
             // EditForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(373, 342);
+            Controls.Add(editStatusLabel);
+            Controls.Add(editStatusComboBox);
             Controls.Add(cancelEditButton);
             Controls.Add(editSaveButton);
             Controls.Add(editManagerComboBox);
@@ -305,5 +328,7 @@
         private ComboBox editManagerComboBox;
         private Button editSaveButton;
         private Button cancelEditButton;
+        private ComboBox editStatusComboBox;
+        private Label editStatusLabel;
     }
 }

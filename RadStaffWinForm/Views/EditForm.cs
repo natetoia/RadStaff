@@ -11,14 +11,45 @@ public partial class EditForm : Form
     private const string PhoneNumberValidationPattern = @"^\d{0,16}$";
     private const string OfficeNumberValidationPattern = @"^\d{0,5}$";
     private readonly ToolTip _toolTip = new();
+    private readonly int _selectedStaffId;
 
     public EditForm()
     {
         InitializeComponent();
         BindStaffTypesComboBox();
+        BindStaffStatusComboBox();
     }
 
     public MainForm? StaffMainFormReference { get; set; }
+
+    public EditForm(int selectedStaffId) : this()
+    {
+        _selectedStaffId = selectedStaffId;
+        var staffMember = GetStaffMemberDetails();
+        if (staffMember != null)
+        {
+            editTitleComboBox.SelectedItem = staffMember.StaffTitle;
+            editTypeComboBox.SelectedValue = staffMember.StaffType.StaffTypeId;
+            if (editManagerComboBox.Enabled)
+            {
+                editManagerComboBox.SelectedValue = staffMember.StaffManager?.StaffId ?? -1;
+            }
+            editFirstNameTextBox.Text = staffMember.StaffFirstName;
+            editMiddleInitialTextBox.Text = staffMember.StaffMiddleInitial;
+            editLastNameTextBox.Text = staffMember.StaffLastName;
+            editIRDTextBox.Text = staffMember.StaffIrdnumber;
+            editMobileTextBox.Text = staffMember.StaffCellPhone;
+            editHomeTextBox.Text = staffMember.StaffHomePhone;
+            editOfficeTextBox.Text = staffMember.StaffOfficeExtension;
+            editStatusComboBox.SelectedValue = staffMember.StaffStatus.StaffStatusId;
+        }
+    }
+
+    private StaffMember? GetStaffMemberDetails()
+    {
+        return DataService.DataService.GetStaffMemberById(_selectedStaffId);
+    }
+
 
     private void BindStaffTypesComboBox()
     {
@@ -27,6 +58,15 @@ public partial class EditForm : Form
         editTypeComboBox.DisplayMember = "StaffTypeDescription";
         editTypeComboBox.ValueMember = "StaffTypeId";
         editTypeComboBox.SelectedIndex = -1;
+    }
+
+    private void BindStaffStatusComboBox()
+    {
+        var staffStatuses = DataService.DataService.GetStaffStatuses();
+        editStatusComboBox.DataSource = staffStatuses;
+        editStatusComboBox.DisplayMember = "StaffStatusDescription";
+        editStatusComboBox.ValueMember = "StaffStatusId";
+        editStatusComboBox.SelectedIndex = -1;
     }
 
     private void BindManagerComboBox()
@@ -52,7 +92,28 @@ public partial class EditForm : Form
 
     private void EditSaveButton_Click(object sender, EventArgs e)
     {
-
+        if (!ValidateInput()) return;
+        var confirmNew = MessageBox.Show("Confirm Updated Employee?", "Confirm Updated Employee",
+            MessageBoxButtons.YesNo);
+        if (confirmNew == DialogResult.No) return;
+        StaffMember updatedStaffMember = new StaffMember
+        {
+            StaffTitle = editTitleComboBox.Text,
+            StaffFirstName = editFirstNameTextBox.Text,
+            StaffMiddleInitial = editMiddleInitialTextBox.Text,
+            StaffLastName = editLastNameTextBox.Text,
+            StaffIrdnumber = editIRDTextBox.Text,
+            StaffCellPhone = editMobileTextBox.Text,
+            StaffHomePhone = editHomeTextBox.Text,
+            StaffOfficeExtension = editOfficeTextBox.Text,
+            StaffTypeId = (int)editTypeComboBox.SelectedValue!,
+            StaffManagerId = (int?)editManagerComboBox.SelectedValue,
+            StaffStatusId = (int)editStatusComboBox.SelectedValue!
+        };
+        DataService.DataService.UpdateStaffMemberById(_selectedStaffId, updatedStaffMember);
+        StaffMainFormReference?.BindDataToListView();
+        MessageBox.Show("Employee Updated Succesfully");
+        Close();
     }
 
     private void EditFirstNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -180,10 +241,24 @@ public partial class EditForm : Form
             return false;
         }
 
+        if ((int?)editTypeComboBox.SelectedValue == 1 &&
+            DataService.DataService.HasStaffMembersWithManagerId(_selectedStaffId))
+        {
+            _toolTip.Show("Reassign associated employees to a new manager first.",
+                editTypeComboBox, 0, -20, 5000);
+            return false;
+        }
+
         if (editManagerComboBox.Enabled && editManagerComboBox.SelectedIndex == -1)
         {
             _toolTip.Show("Manager must be selected. If no Manager exists, please create a Manager record.",
                 editManagerComboBox, 0, -20, 5000);
+            return false;
+        }
+
+        if (editManagerComboBox.Enabled && (int)editManagerComboBox.SelectedValue! == _selectedStaffId)
+        {
+            _toolTip.Show("Employee cannot be their own Manager", editManagerComboBox, 0, -20, 5000);
             return false;
         }
 
@@ -211,5 +286,11 @@ public partial class EditForm : Form
         return true;
     }
 
-
+    private void CancelEditButton_Click(object sender, EventArgs e)
+    {
+        var confirmClose = MessageBox.Show("Are you sure you want to cancel?", "Cancel Edit Employee",
+            MessageBoxButtons.YesNo);
+        if (confirmClose == DialogResult.Yes)
+            Close();
+    }
 }
