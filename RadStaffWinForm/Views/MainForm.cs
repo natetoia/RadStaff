@@ -1,3 +1,5 @@
+using System.Drawing.Printing;
+
 namespace RadStaffWinForm.Views;
 
 public partial class MainForm : Form
@@ -5,7 +7,10 @@ public partial class MainForm : Form
     private const int ActiveStatusId = 1;
     private const int InactiveStatusId = 2;
     private const int PendingStatusId = 3;
+    private const int linesPerPage = 20;
     private readonly List<int> _selectedStatusIds = [];
+    private int currentPage = 1;
+    private List<string> reportLines;
 
 
     public MainForm()
@@ -193,5 +198,58 @@ public partial class MainForm : Form
         }
 
         MessageBox.Show("Staff data exported successfully to staff_export.csv");
+    }
+
+    private void ExportReportButton_Click(object sender, EventArgs e)
+    {
+        reportLines = new List<string>();
+
+        var staffMembers = DataService.DataService.GetStaffMembersWithDetails()!
+            .OrderBy(s => s.StaffFirstName)
+            .GroupBy(s => s.StaffType.StaffTypeDescription)
+            .ToList();
+
+        foreach (var group in staffMembers)
+        {
+            foreach (var staffMember in group)
+                reportLines.Add(
+                    $"{staffMember.StaffId},{group.Key},{staffMember.StaffStatus.StaffStatusDescription}," +
+                    $"{staffMember.StaffTitle},{staffMember.StaffFirstName},{staffMember.StaffMiddleInitial}," +
+                    $"{staffMember.StaffLastName},{staffMember.StaffType.StaffTypeDescription}," +
+                    $"{(staffMember.StaffManager is { } manager ? $"{manager.StaffFirstName} {manager.StaffLastName}" : "")}," +
+                    $"{staffMember.StaffHomePhone},{staffMember.StaffCellPhone},{staffMember.StaffOfficeExtension}," +
+                    $"{staffMember.StaffIrdnumber}");
+            reportLines.Add("");
+        }
+
+        var printDocument = new PrintDocument();
+        printDocument.PrintPage += PrintPageHandler;
+
+        var printDialog = new PrintDialog();
+
+        if (printDialog.ShowDialog() == DialogResult.OK)
+        {
+            var printPreviewDialog = new PrintPreviewDialog();
+            printPreviewDialog.Document = printDocument;
+            printPreviewDialog.ShowDialog();
+        }
+    }
+
+    private void PrintPageHandler(object sender, PrintPageEventArgs e)
+    {
+        var linesPrinted = 0;
+        var startIndex = (currentPage - 1) * linesPerPage;
+
+        while (linesPrinted < linesPerPage && startIndex < reportLines.Count)
+        {
+            e.Graphics.DrawString(reportLines[startIndex], new Font("Arial", 12), Brushes.Black, 100,
+                100 + linesPrinted * 20);
+            startIndex++;
+            linesPrinted++;
+        }
+
+        currentPage++;
+
+        e.HasMorePages = startIndex < reportLines.Count;
     }
 }

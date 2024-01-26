@@ -142,6 +142,7 @@
             exportCsvButton.Text = "Export CSV";
             exportCsvButton.UseVisualStyleBackColor = true;
             exportCsvButton.Click += ExportCsvButton_Click;
+            exportReportButton.Click += ExportReportButton_Click;
             // 
             // exportReportButton
             // 
@@ -175,6 +176,11 @@
             Resize += MainForm_Resize;
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void ExportReportButton_Click1(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
