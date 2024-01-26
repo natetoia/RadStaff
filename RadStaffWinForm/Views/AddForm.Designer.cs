@@ -85,7 +85,7 @@
             addFirstNameTextBox.Location = new Point(12, 84);
             addFirstNameTextBox.Name = "addFirstNameTextBox";
             addFirstNameTextBox.Size = new Size(163, 23);
-            addFirstNameTextBox.TabIndex = 4;
+            addFirstNameTextBox.TabIndex = 1;
             addFirstNameTextBox.KeyPress += AddFirstNameTextBox_KeyPress;
             // 
             // addMiddleInitialTextBox
@@ -93,7 +93,7 @@
             addMiddleInitialTextBox.Location = new Point(12, 141);
             addMiddleInitialTextBox.Name = "addMiddleInitialTextBox";
             addMiddleInitialTextBox.Size = new Size(163, 23);
-            addMiddleInitialTextBox.TabIndex = 5;
+            addMiddleInitialTextBox.TabIndex = 2;
             addMiddleInitialTextBox.KeyPress += AddMiddleInitialTextBox_KeyPress;
             // 
             // addMiddleInitialLabel
@@ -119,7 +119,7 @@
             addLastNameTextBox.Location = new Point(12, 198);
             addLastNameTextBox.Name = "addLastNameTextBox";
             addLastNameTextBox.Size = new Size(163, 23);
-            addLastNameTextBox.TabIndex = 8;
+            addLastNameTextBox.TabIndex = 3;
             addLastNameTextBox.KeyPress += AddLastNameTextBox_KeyPress;
             // 
             // addHomeLabel
@@ -136,7 +136,7 @@
             addIRDTextBox.Location = new Point(12, 255);
             addIRDTextBox.Name = "addIRDTextBox";
             addIRDTextBox.Size = new Size(163, 23);
-            addIRDTextBox.TabIndex = 10;
+            addIRDTextBox.TabIndex = 4;
             addIRDTextBox.KeyPress += AddIRDTextBox_KeyPress;
             // 
             // addMobileLabel
@@ -153,7 +153,7 @@
             addMobileTextBox.Location = new Point(198, 141);
             addMobileTextBox.Name = "addMobileTextBox";
             addMobileTextBox.Size = new Size(163, 23);
-            addMobileTextBox.TabIndex = 12;
+            addMobileTextBox.TabIndex = 7;
             addMobileTextBox.KeyPress += AddMobileTextBox_KeyPress;
             // 
             // addOfficeLabel
@@ -170,7 +170,7 @@
             addHomeTextBox.Location = new Point(198, 198);
             addHomeTextBox.Name = "addHomeTextBox";
             addHomeTextBox.Size = new Size(163, 23);
-            addHomeTextBox.TabIndex = 14;
+            addHomeTextBox.TabIndex = 8;
             addHomeTextBox.KeyPress += AddHomeTextBox_KeyPress;
             // 
             // addIRDLabel
@@ -187,7 +187,7 @@
             addOfficeTextBox.Location = new Point(198, 255);
             addOfficeTextBox.Name = "addOfficeTextBox";
             addOfficeTextBox.Size = new Size(163, 23);
-            addOfficeTextBox.TabIndex = 16;
+            addOfficeTextBox.TabIndex = 9;
             addOfficeTextBox.KeyPress += AddOfficeTextBox_KeyPress;
             // 
             // addTypeLabel
@@ -206,7 +206,7 @@
             addTypeComboBox.Location = new Point(198, 27);
             addTypeComboBox.Name = "addTypeComboBox";
             addTypeComboBox.Size = new Size(163, 23);
-            addTypeComboBox.TabIndex = 18;
+            addTypeComboBox.TabIndex = 5;
             addTypeComboBox.SelectedIndexChanged += AddTypeComboBox_SelectedIndexChanged;
             // 
             // addManagerLabel
@@ -225,14 +225,14 @@
             addManagerComboBox.Location = new Point(198, 84);
             addManagerComboBox.Name = "addManagerComboBox";
             addManagerComboBox.Size = new Size(163, 23);
-            addManagerComboBox.TabIndex = 20;
+            addManagerComboBox.TabIndex = 6;
             // 
             // addNewButton
             // 
             addNewButton.Location = new Point(198, 305);
             addNewButton.Name = "addNewButton";
             addNewButton.Size = new Size(75, 25);
-            addNewButton.TabIndex = 21;
+            addNewButton.TabIndex = 10;
             addNewButton.Text = "Add";
             addNewButton.UseVisualStyleBackColor = true;
             addNewButton.Click += addNewButton_Click;

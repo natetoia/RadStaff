@@ -87,7 +87,7 @@
             editFirstNameTextBox.Location = new Point(12, 82);
             editFirstNameTextBox.Name = "editFirstNameTextBox";
             editFirstNameTextBox.Size = new Size(163, 23);
-            editFirstNameTextBox.TabIndex = 4;
+            editFirstNameTextBox.TabIndex = 1;
             editFirstNameTextBox.KeyPress += EditFirstNameTextBox_KeyPress;
             // 
             // editMiddleInitialTextBox
@@ -95,7 +95,7 @@
             editMiddleInitialTextBox.Location = new Point(12, 137);
             editMiddleInitialTextBox.Name = "editMiddleInitialTextBox";
             editMiddleInitialTextBox.Size = new Size(163, 23);
-            editMiddleInitialTextBox.TabIndex = 5;
+            editMiddleInitialTextBox.TabIndex = 2;
             editMiddleInitialTextBox.KeyPress += EditMiddleInitialTextBox_KeyPress;
             // 
             // editMiddleInitialLabel
@@ -121,7 +121,7 @@
             editLastNameTextBox.Location = new Point(12, 192);
             editLastNameTextBox.Name = "editLastNameTextBox";
             editLastNameTextBox.Size = new Size(163, 23);
-            editLastNameTextBox.TabIndex = 8;
+            editLastNameTextBox.TabIndex = 3;
             editLastNameTextBox.KeyPress += EditLastNameTextBox_KeyPress;
             // 
             // editHomeLabel
@@ -138,7 +138,7 @@
             editIRDTextBox.Location = new Point(12, 247);
             editIRDTextBox.Name = "editIRDTextBox";
             editIRDTextBox.Size = new Size(163, 23);
-            editIRDTextBox.TabIndex = 10;
+            editIRDTextBox.TabIndex = 4;
             editIRDTextBox.KeyPress += EditIRDTextBox_KeyPress;
             // 
             // editMobileLabel
@@ -155,7 +155,7 @@
             editMobileTextBox.Location = new Point(198, 137);
             editMobileTextBox.Name = "editMobileTextBox";
             editMobileTextBox.Size = new Size(163, 23);
-            editMobileTextBox.TabIndex = 12;
+            editMobileTextBox.TabIndex = 8;
             editMobileTextBox.KeyPress += EditMobileTextBox_KeyPress;
             // 
             // editOfficeLabel
@@ -172,7 +172,7 @@
             editHomeTextBox.Location = new Point(198, 192);
             editHomeTextBox.Name = "editHomeTextBox";
             editHomeTextBox.Size = new Size(163, 23);
-            editHomeTextBox.TabIndex = 14;
+            editHomeTextBox.TabIndex = 9;
             editHomeTextBox.KeyPress += EditHomeTextBox_KeyPress;
             // 
             // editIRDLabel
@@ -189,7 +189,7 @@
             editOfficeTextBox.Location = new Point(198, 247);
             editOfficeTextBox.Name = "editOfficeTextBox";
             editOfficeTextBox.Size = new Size(163, 23);
-            editOfficeTextBox.TabIndex = 16;
+            editOfficeTextBox.TabIndex = 10;
             editOfficeTextBox.KeyPress += EditOfficeTextBox_KeyPress;
             // 
             // editTypeLabel
@@ -208,7 +208,7 @@
             editTypeComboBox.Location = new Point(198, 27);
             editTypeComboBox.Name = "editTypeComboBox";
             editTypeComboBox.Size = new Size(163, 23);
-            editTypeComboBox.TabIndex = 18;
+            editTypeComboBox.TabIndex = 6;
             editTypeComboBox.SelectedIndexChanged += EditTypeComboBox_SelectedIndexChanged;
             // 
             // editManagerLabel
@@ -227,14 +227,14 @@
             editManagerComboBox.Location = new Point(198, 82);
             editManagerComboBox.Name = "editManagerComboBox";
             editManagerComboBox.Size = new Size(163, 23);
-            editManagerComboBox.TabIndex = 20;
+            editManagerComboBox.TabIndex = 7;
             // 
             // editSaveButton
             // 
             editSaveButton.Location = new Point(198, 302);
             editSaveButton.Name = "editSaveButton";
             editSaveButton.Size = new Size(75, 25);
-            editSaveButton.TabIndex = 21;
+            editSaveButton.TabIndex = 11;
             editSaveButton.Text = "Save";
             editSaveButton.UseVisualStyleBackColor = true;
             editSaveButton.Click += EditSaveButton_Click;
@@ -256,7 +256,7 @@
             editStatusComboBox.Location = new Point(12, 302);
             editStatusComboBox.Name = "editStatusComboBox";
             editStatusComboBox.Size = new Size(163, 23);
-            editStatusComboBox.TabIndex = 23;
+            editStatusComboBox.TabIndex = 5;
             // 
             // editStatusLabel
             // 

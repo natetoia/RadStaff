@@ -57,7 +57,9 @@ public partial class MainForm : Form
         CreateListView();
 
         UpdateSelectedStatusIds();
-        var staffMembers = DataService.DataService.GetStaffMembersWithDetails(_selectedStatusIds);
+        var staffMembers = DataService.DataService.GetStaffMembersWithDetails()!
+            .Where(s => _selectedStatusIds.Contains(s.StaffStatus.StaffStatusId))
+            .OrderBy(s => s.StaffId);
 
         if (staffMembers == null)
             return;
@@ -161,5 +163,35 @@ public partial class MainForm : Form
     private static bool DeleteStaffValidation(int staffId)
     {
         return !DataService.DataService.HasStaffMembersWithManagerId(staffId);
+    }
+
+    private void ExportCsvButton_Click(object sender, EventArgs e)
+    {
+        var staffMembers = DataService.DataService.GetStaffMembersWithDetails()!
+            .OrderBy(s => s.StaffFirstName)
+            .GroupBy(s => s.StaffType.StaffTypeDescription)
+            .ToList();
+
+        using (var streamWriter = new StreamWriter("staff_export.csv"))
+        {
+            streamWriter.WriteLine("StaffType,StaffId,Employee Status,Title," +
+                                   "First Name,Middle Initial,Last Name," +
+                                   "Employee Type,Manager,Home Ph,Mobile Ph," +
+                                   "Office Ext.,IRD Number");
+            foreach (var group in staffMembers)
+            {
+                foreach (var staffMember in group)
+                    streamWriter.WriteLine(
+                        $"{staffMember.StaffId},{group.Key},{staffMember.StaffStatus.StaffStatusDescription}," +
+                        $"{staffMember.StaffTitle},{staffMember.StaffFirstName},{staffMember.StaffMiddleInitial}," +
+                        $"{staffMember.StaffLastName},{staffMember.StaffType.StaffTypeDescription}," +
+                        $"{(staffMember.StaffManager is { } manager ? $"{manager.StaffFirstName} {manager.StaffLastName}" : "")}," +
+                        $"{staffMember.StaffHomePhone},{staffMember.StaffCellPhone},{staffMember.StaffOfficeExtension}," +
+                        $"{staffMember.StaffIrdnumber}");
+                streamWriter.WriteLine();
+            }
+        }
+
+        MessageBox.Show("Staff data exported successfully to staff_export.csv");
     }
 }

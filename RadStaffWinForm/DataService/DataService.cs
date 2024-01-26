@@ -5,7 +5,7 @@ namespace RadStaffWinForm.DataService;
 
 public class DataService
 {
-    public static List<StaffMember>? GetStaffMembersWithDetails(List<int> statusIds)
+    public static List<StaffMember>? GetStaffMembersWithDetails()
     {
         using (var context = new RadDbContext())
         {
@@ -13,8 +13,6 @@ public class DataService
                 .Include(s => s.StaffStatus)
                 .Include(s => s.StaffType)
                 .Include(s => s.StaffManager)?
-                .Where(s => statusIds.Contains(s.StaffStatusId))
-                .OrderBy(s => s.StaffId)
                 .ToList();
         }
     }

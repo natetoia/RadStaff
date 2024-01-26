@@ -29,6 +29,8 @@
             addStaffButton = new Button();
             editStaffButton = new Button();
             deleteStaffButton = new Button();
+            exportCsvButton = new Button();
+            exportReportButton = new Button();
             SuspendLayout();
             // 
             // mainFormTitle
@@ -130,12 +132,35 @@
             deleteStaffButton.UseVisualStyleBackColor = true;
             deleteStaffButton.Click += DeleteStaffButton_Click;
             // 
+            // exportCsvButton
+            // 
+            exportCsvButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            exportCsvButton.Location = new Point(290, 607);
+            exportCsvButton.Name = "exportCsvButton";
+            exportCsvButton.Size = new Size(133, 33);
+            exportCsvButton.TabIndex = 8;
+            exportCsvButton.Text = "Export CSV";
+            exportCsvButton.UseVisualStyleBackColor = true;
+            exportCsvButton.Click += ExportCsvButton_Click;
+            // 
+            // exportReportButton
+            // 
+            exportReportButton.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            exportReportButton.Location = new Point(429, 607);
+            exportReportButton.Name = "exportReportButton";
+            exportReportButton.Size = new Size(133, 33);
+            exportReportButton.TabIndex = 9;
+            exportReportButton.Text = "Export Report";
+            exportReportButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1140, 653);
+            Controls.Add(exportReportButton);
+            Controls.Add(exportCsvButton);
             Controls.Add(deleteStaffButton);
             Controls.Add(editStaffButton);
             Controls.Add(addStaffButton);
@@ -162,5 +187,7 @@
         private Button editStaffButton;
         private ListView allStaffListView;
         private Button deleteStaffButton;
+        private Button exportCsvButton;
+        private Button exportReportButton;
     }
 }
