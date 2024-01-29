@@ -1,5 +1,4 @@
 using System.Drawing.Printing;
-using RadStaffWinForm.Models;
 
 namespace RadStaffWinForm.Views;
 
@@ -215,13 +214,12 @@ public partial class MainForm : Form
             reportLines.Add($"{group.Key}s");
             foreach (var staffMember in group)
                 reportLines.Add(
-
                     $"Staff ID: {staffMember.StaffId}\n" +
                     $"Name: {staffMember.StaffTitle} {staffMember.StaffFirstName} {staffMember.StaffMiddleInitial} {staffMember.StaffLastName}\n" +
-                    $"Staff Type: {staffMember.StaffType.StaffTypeDescription}\t" + $"{(staffMember.StaffManager is { } manager ? $"Manager: {manager.StaffFirstName} {manager.StaffLastName}" : "")}\n" +
+                    $"Staff Type: {staffMember.StaffType.StaffTypeDescription}\t" +
+                    $"{(staffMember.StaffManager is { } manager ? $"Manager: {manager.StaffFirstName} {manager.StaffLastName}" : "")}\n" +
                     $"Home Ph: {staffMember.StaffHomePhone}\t Mobile: {staffMember.StaffCellPhone}\t Office Ext: {staffMember.StaffOfficeExtension}\n" +
                     $"IRD Number: {staffMember.StaffIrdnumber}");
-
         }
 
         var printDocument = new PrintDocument();
