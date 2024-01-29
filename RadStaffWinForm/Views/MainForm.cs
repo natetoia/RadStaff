@@ -1,4 +1,5 @@
 using System.Drawing.Printing;
+using RadStaffWinForm.Models;
 
 namespace RadStaffWinForm.Views;
 
@@ -211,15 +212,16 @@ public partial class MainForm : Form
 
         foreach (var group in staffMembers)
         {
+            reportLines.Add($"{group.Key}s");
             foreach (var staffMember in group)
                 reportLines.Add(
-                    $"{staffMember.StaffId},{group.Key},{staffMember.StaffStatus.StaffStatusDescription}," +
-                    $"{staffMember.StaffTitle},{staffMember.StaffFirstName},{staffMember.StaffMiddleInitial}," +
-                    $"{staffMember.StaffLastName},{staffMember.StaffType.StaffTypeDescription}," +
-                    $"{(staffMember.StaffManager is { } manager ? $"{manager.StaffFirstName} {manager.StaffLastName}" : "")}," +
-                    $"{staffMember.StaffHomePhone},{staffMember.StaffCellPhone},{staffMember.StaffOfficeExtension}," +
-                    $"{staffMember.StaffIrdnumber}");
-            reportLines.Add("");
+
+                    $"Staff ID: {staffMember.StaffId}\n" +
+                    $"Name: {staffMember.StaffTitle} {staffMember.StaffFirstName} {staffMember.StaffMiddleInitial} {staffMember.StaffLastName}\n" +
+                    $"Staff Type: {staffMember.StaffType.StaffTypeDescription}\t" + $"{(staffMember.StaffManager is { } manager ? $"Manager: {manager.StaffFirstName} {manager.StaffLastName}" : "")}\n" +
+                    $"Home Ph: {staffMember.StaffHomePhone}\t Mobile: {staffMember.StaffCellPhone}\t Office Ext: {staffMember.StaffOfficeExtension}\n" +
+                    $"IRD Number: {staffMember.StaffIrdnumber}");
+
         }
 
         var printDocument = new PrintDocument();
@@ -238,12 +240,12 @@ public partial class MainForm : Form
     private void PrintPageHandler(object sender, PrintPageEventArgs e)
     {
         var linesPrinted = 0;
-        var startIndex = (currentPage - 1) * linesPerPage;
+        var startIndex = (currentPage - 1) * (linesPerPage + 1);
 
         while (linesPrinted < linesPerPage && startIndex < reportLines.Count)
         {
             e.Graphics.DrawString(reportLines[startIndex], new Font("Arial", 12), Brushes.Black, 100,
-                100 + linesPrinted * 20);
+                100 + linesPrinted * 110);
             startIndex++;
             linesPrinted++;
         }
